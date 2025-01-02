@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Ajouter un Emprunt</title>
+</head>
+<body>
+<h1>Formulaire d'Emprunt</h1>
+
+<form th:action="@{/emprunts/ajouter}" th:object="${emprunt}" method="post">
+  <div>
+    <label for="utilisateurDto">Utilisateur :</label>
+    <select th:field="*{utilisateurDto.id}">
+      <option th:each="utilisateur : ${utilisateurs}"
+              th:value="${utilisateur.id}"
+              th:text="${utilisateur.nom}"></option>
+    </select>
+  </div>
+
+  <div>
+    <label for="livreDto">Livre :</label>
+    <select th:field="*{livreDto.id}">
+      <option th:each="livre : ${livres}"
+              th:value="${livre.id}"
+              th:text="${livre.titre}"></option>
+    </select>
+  </div>
+
+  <div>
+    <label for="dateEmprunt">Date d'Emprunt :</label>
+    <input type="date" th:field="*{dateEmprunt}" required />
+  </div>
+
+  <div>
+    <label for="dateRetourPrevu">Date de Retour Prévu :</label>
+    <input type="date" th:field="*{dateRetourPrevu}" required />
+  </div>
+
+  <div>
+    <button type="submit">Ajouter l'Emprunt</button>
+  </div>
+
+  <div th:if="${message}">
+    <p th:text="${message}"></p>
+  </div>
+</form>
+</body>
+</html>
